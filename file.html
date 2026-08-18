@@ -37,33 +37,40 @@
     <input id="tokenKey" size="60"
            value="9505026c-da6f-4a56-bc90-4216d6ca69c4"></input>
     <br><br>
-
-    <label>
-        画像ファイル選択
-        <li>
-            <input type="file" id="imageid"></li>
-    </label>
-    <br><br>
-
-    <button id="sendBtn">送信</button>
-
-    <h2>レスポンス</h2>
-    <pre id="responseView">(まだレスポンスはありません)</pre>
 </label>
+<label>
+    画像ファイル選択
+    <li>
+        <input type="file" id="imageId"></li>
+</label>
+<br><br>
+
+<button id="sendBtn">送信</button>
+
+<h2>レスポンス</h2>
+<pre id="responseView">(まだレスポンスはありません)</pre>
 <script>
     const apiUrlInput = document.getElementById('apiUrl');
     const tokenKey = document.getElementById('tokenKey');
-    const imageFile = document.getElementById('imageid');
+    const iFiles = document.getElementById('imageId');
     const sendBtn = document.getElementById('sendBtn');
     const responseView = document.getElementById('responseView');
 
     sendBtn.addEventListener('click', async () => {
         const url = apiUrlInput.value.trim();
         const token = tokenKey.value.trim();
+        const imageFile = iFiles.files[0];
+        const mime = iFiles.type;
+
+        const fileIdType = new File(
+            [imageFile],
+            imageFile.name,
+            {type: mime}
+        );
         // multipart/form-data の中身を作る
         const formData = new FormData();
-        formData.append('file', imageFile.files[0]);
-        //formData.append("type",fileid);
+        formData.append('file', fileIdType);
+
         if (!url) {
             alert('API URL を入力してください');
             return;
@@ -80,9 +87,10 @@
                     method: 'POST',
                     headers: {
                         'X-NWPSToken': token,
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'multipart/form-data'
                     },
-                    bodys: formData
+                    body: formData
                 }
             );
 

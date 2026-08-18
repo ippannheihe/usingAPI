@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>JSON API テスト</title>
-  <style>
-    body { font-family: sans-serif; }
-    textarea { width: 600px; height: 200px; }
-    pre { background: #f5f5f5; padding: 8px; }
-  </style>
+    <meta charset="UTF-8">
+    <title>JSON API テスト</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        textarea {
+            width: 600px;
+            height: 200px;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
-  <h1>JSONテキストでAPIとやり取り</h1>
+<h1>JSONテキストでAPIとやり取り</h1>
 
-  <!-- APIのURL -->
-  <label>
+<!-- APIのURL -->
+<label>
     API URL:
     <input id="apiUrl" type="text" size="60"
            value="https://api.networkprint.jp/nwpsapi/v2/loginforguest">
-  </label>
-  <br><br>
+</label>
+<br><br>
 
-  <!-- JSONテキスト入力欄 -->
-  <label>APPkeyの入力
+<!-- JSONテキスト入力欄 -->
+<label>APPkeyの入力
     <br>
     <input id="tokenKey" size="60"
-    value="28ce617e-af8b-4110-9eb7-c4ea165c43fe"></input>
+           value="28ce617e-af8b-4110-9eb7-c4ea165c43fe"></input>
     <br><br>
-  </label>
-  <label>
+</label>
+<label>
     JSON入力:
     <br>
     <textarea id="jsonText">
@@ -35,67 +45,67 @@
   
 }
     </textarea>
-  </label>
-  <br><br>
+</label>
+<br><br>
 
-  <button id="sendBtn">送信</button>
+<button id="sendBtn">送信</button>
 
-  <h2>レスポンス</h2>
-  <pre id="responseView">(まだレスポンスはありません)</pre>
+<h2>レスポンス</h2>
+<pre id="responseView">(まだレスポンスはありません)</pre>
 
-  <script>
+<script>
     const apiUrlInput = document.getElementById('apiUrl');
-    const tokenKey    = document.getElementById('tokenKey');
-    const jsonText    = document.getElementById('jsonText');
-    const sendBtn     = document.getElementById('sendBtn');
+    const tokenKey = document.getElementById('tokenKey');
+    const jsonText = document.getElementById('jsonText');
+    const sendBtn = document.getElementById('sendBtn');
     const responseView = document.getElementById('responseView');
 
     sendBtn.addEventListener('click', async () => {
-      const url = apiUrlInput.value.trim();
-      const token = tokenKey.value.trim();
-      const text = jsonText.value.trim();
+        const url = apiUrlInput.value.trim();
+        const token = tokenKey.value.trim();
+        const text = jsonText.value.trim();
 
-      if (!url) {
-        alert('API URL を入力してください');
-        return;
-      }
-      if (!text) {
-        alert('送信する JSON を入力してください');
-        return;
-      }
-      if (!token) {
-        alert('AppKeyを入力してください');
-        return;
-      }
-      try {
-        // JSONとしてパース（エラー確認）
-        const jsonData = JSON.parse(text);
-
-        // fetchでPOST送信
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-NWPSAppKey': token,
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(jsonData)
-        });
-
-        if (!res.ok) {
-          const errText = await res.text();
-          responseView.textContent =
-            `HTTPエラー: ${res.status}\n\n` + errText;
-          return;
+        if (!url) {
+            alert('API URL を入力してください');
+            return;
         }
+        if (!text) {
+            alert('送信する JSON を入力してください');
+            return;
+        }
+        if (!token) {
+            alert('AppKeyを入力してください');
+            return;
+        }
+        try {
+            // JSONとしてパース（エラー確認）
+            const jsonData = JSON.parse(text);
 
-        const resJson = await res.json();
-        responseView.textContent = JSON.stringify(resJson, null, 2);
+            // fetchでPOST送信
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-NWPSAppKey': token,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
 
-      } catch (e) {
-        responseView.textContent = 'エラー: ' + e.message;
-      }
+            if (!res.ok) {
+                const errText = await res.text();
+                responseView.textContent =
+                    `HTTPエラー: ${res.status}\n\n` + errText;
+                return;
+            }
+
+            const resJson = await res.json();
+            responseView.textContent = JSON.stringify(resJson, null, 2);
+
+        } catch (e) {
+            responseView.textContent = 'エラー: ' + e.message;
+        }
     });
-  </script>
+</script>
 </body>
 </html>
