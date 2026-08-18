@@ -41,7 +41,7 @@
     <label>
         画像ファイル選択
         <li>
-            <input id="fileid" type="file" multiple></li>
+            <input type="file" id="imageid"></li>
     </label>
     <br><br>
 
@@ -49,37 +49,36 @@
 
     <h2>レスポンス</h2>
     <pre id="responseView">(まだレスポンスはありません)</pre>
-</label>>
+</label>
 <script>
     const apiUrlInput = document.getElementById('apiUrl');
     const tokenKey = document.getElementById('tokenKey');
-    const filena = document.getElementById('fileid');
+    const imageFile = document.getElementById('imageid');
     const sendBtn = document.getElementById('sendBtn');
     const responseView = document.getElementById('responseView');
+
     sendBtn.addEventListener('click', async () => {
         const url = apiUrlInput.value.trim();
         const token = tokenKey.value.trim();
-        const files = filena.files[0];
-        const fileid = filena.id;
+        // multipart/form-data の中身を作る
         const formData = new FormData();
-        formData.append('file', files);
+        formData.append('file', imageFile.files[0]);
         //formData.append("type",fileid);
         if (!url) {
             alert('API URL を入力してください');
             return;
         }
-        if (!files) {
+        if (!imageFile) {
             alert('画像ファイルを選択してください');
             return;
         }
-        try {
 
+        try {
 
             // fetchでPOST送信
             const res = await fetch(url, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'multipart/form-data',
                         'X-NWPSToken': token,
                         'Accept': 'application/json'
                     },
