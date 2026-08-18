@@ -35,7 +35,7 @@
 <label>tokenの入力
     <br>
     <input id="tokenKey" size="60"
-           value="9505026c-da6f-4a56-bc90-4216d6ca69c4"></input>
+           value="cf61972d-2882-4fef-87af-15511fce5d75"></input>
     <br><br>
 </label>
 <label>
@@ -77,15 +77,13 @@
 
             // fetchでPOST送信
             const res = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'X-NWPSToken': token,
-                        'Accept': 'application/json',
-                        'Content-Type': 'multipart/form-data'
-                    },
-                    body: formData
-                }
-            );
+                method: 'POST',
+                headers: {
+                    'X-NWPSToken': token,
+                    'Accept': 'application/json',
+                },
+                body: formData
+            });
 
             if (!res.ok) {
                 const errText = await res.text();
