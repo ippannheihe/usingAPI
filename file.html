@@ -60,7 +60,6 @@
         const url = apiUrlInput.value.trim();
         const token = tokenKey.value.trim();
         const imageFile = iFiles.files[0];
-        const mime = iFiles.type;
 
         if (!url) {
             alert('API URL を入力してください');
@@ -70,15 +69,9 @@
             alert('画像ファイルを選択してください');
             return;
         }
-
-        const fileIdType = new File(
-            [imageFile],
-            imageFile.name,
-            {type: mime}
-        );
         // multipart/form-data の中身を作る
         const formData = new FormData();
-        formData.append('file', fileIdType);
+        formData.append('file', imageFile);
 
         try {
 
