@@ -62,6 +62,15 @@
         const imageFile = iFiles.files[0];
         const mime = iFiles.type;
 
+        if (!url) {
+            alert('API URL を入力してください');
+            return;
+        }
+        if (!iFiles.files.length) {
+            alert('画像ファイルを選択してください');
+            return;
+        }
+
         const fileIdType = new File(
             [imageFile],
             imageFile.name,
@@ -70,15 +79,6 @@
         // multipart/form-data の中身を作る
         const formData = new FormData();
         formData.append('file', fileIdType);
-
-        if (!url) {
-            alert('API URL を入力してください');
-            return;
-        }
-        if (!imageFile) {
-            alert('画像ファイルを選択してください');
-            return;
-        }
 
         try {
 
