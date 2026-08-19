@@ -8,7 +8,7 @@ class CheckBox extends HTMLElement {
         let html = "";
         for (let i = 0; i < count; i++) {
             html += '<div class="item"><label><input type="checkbox"  class="cb" data-index="' + i + '" id="' + items[i] + '" value=' + i + 'data-index="${i}"}>' + items[i] +
-                '</label><textarea class="txt" data-index="' + i + '" id="' + items[i] + '" value=""></textarea></div><li>';
+                '</label><input class="txt" data-index="' + i + '" id="' + items[i] + '" value="">  </div><li>';
         }
         this.innerHTML = html;
         //生成
