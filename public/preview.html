@@ -2,51 +2,29 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>JSON API テスト</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        textarea {
-            width: 600px;
-            height: 200px;
-        }
-
-        pre {
-            background: #f5f5f5;
-            padding: 8px;
-        }
-    </style>
+    <title>ファイルのプレビュー</title>
+    <link rel="stylesheet" href="../src/css/style.css">
 </head>
 <body>
-<h1>JSONテキストでAPIとやり取り</h1>
-
-<!-- APIのURL -->
-<label>
-    API URL:
-    <input id="apiUrl" type="text" size="60"
-           value="https://api.networkprint.jp/nwpsapi/v2/files/">
-</label>
-<br><br>
-
+<h1>ファイルのプレビューを見る(改装予定)</h1>
+<br>
 <!-- JSONテキスト入力欄 -->
 <label>Tokenの入力
     <br>
-    <input id="tokenKey" size="60"
-           value="cf61972d-2882-4fef-87af-15511fce5d75">
+    <input id="tokenKey"
+           value="33434eb3-e55e-4a79-b32f-174e5b8f348e">
     <br><br>
 </label>
 <label>
     fileId入力:
     <br>
-    <input id="fileId" size="60" value="1605746">
+    <input id="fileId" size="60" value="1605785">
 </label>
 <br><br>
 <label>
     レスポンスのpreview_urlがセキュリティ強化モードかを指定します。<li>
     <select id="secure">
-        <option value="">--</option>
+        <option value="--">--</option>
         <option value="true">true</option>
         <option value="false">false</option>
     </select></li>
@@ -57,7 +35,7 @@
 <h2>レスポンス</h2>
 <pre id="responseView">(まだレスポンスはありません)</pre>
 
-<img id="previewImage">
+<img id="previewImage" alt="">
 <pre id="requestURL"></pre>
 <script src="../src/js/filePreview.js"></script>
 </body>

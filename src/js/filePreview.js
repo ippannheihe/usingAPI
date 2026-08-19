@@ -1,4 +1,3 @@
-const apiUrlInput = document.getElementById('apiUrl');
 const tokenKey = document.getElementById('tokenKey');
 const fileNum = document.getElementById('fileId');
 const secure = document.getElementById('secure');
@@ -9,11 +8,11 @@ let previewImage = document.getElementById('previewImage');
 
 
 sendBtn.addEventListener('click', async () => {
-    const url = apiUrlInput.value.trim();
+    const url = "https://api.networkprint.jp/nwpsapi/v2/files/";
     const token = tokenKey.value.trim();
     const fileId = fileNum.value.trim();
     const secureMode = secure.value.trim();
-    let pre = "";
+    let previewUrl = "";
 
     if (!url) {
         alert('API URL を入力してください');
@@ -28,10 +27,12 @@ sendBtn.addEventListener('click', async () => {
         return;
     }
     if (secureMode === "true" || secureMode === "false") {
-        pre = '?secure_mode=' + secureMode;
-
+       const pre = '?secure_mode=' + secureMode;
+         previewUrl = url + fileId + '/previews' + pre;
+    }else {
+         previewUrl = url + fileId + '/previews';
     }
-    const previewUrl = url + fileId + '/previews' + pre;
+
     try {
 
         // fetchでGET送信
@@ -57,12 +58,12 @@ sendBtn.addEventListener('click', async () => {
         //secure_modeがtrueの場合の処理
         if (secureMode==="true") {
             const resImage = await fetch(ImageUrl, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'X-NWPSToken': token,
                 }
             });
-            const trueURL = await resImage.formData();
+            const trueURL = await resImage.String;
             document.getElementById('previewImage').src = trueURL;
         }else
             document.getElementById('previewImage').src = ImageUrl;

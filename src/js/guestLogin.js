@@ -1,18 +1,13 @@
-    const apiUrlInput = document.getElementById('apiUrl');
     const tokenKey = document.getElementById('tokenKey');
     const jsonText = document.getElementById('jsonText');
     const sendBtn = document.getElementById('sendBtn');
     const responseView = document.getElementById('responseView');
 
     sendBtn.addEventListener('click', async () => {
-    const url = apiUrlInput.value.trim();
+    const url = "https://api.networkprint.jp/nwpsapi/v2/loginforguest";
     const token = tokenKey.value.trim();
     const text = jsonText.value.trim();
 
-    if (!url) {
-    alert('API URL を入力してください');
-    return;
-}
     if (!text) {
     alert('送信する JSON を入力してください');
     return;
