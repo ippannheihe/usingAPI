@@ -1,0 +1,16 @@
+{
+  "name": "using-api",
+  "version": "1.0.0",
+  "description": "ネットワークプリントAPI連携アプリ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.21.2"
+  }
+}
