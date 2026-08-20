@@ -1,5 +1,5 @@
-const tokenKey = document.getElementById('tokenKey');
-const fileNum = document.getElementById('fileId');
+const token = sessionStorage.getItem("token");
+const fileId = sessionStorage.getItem("file_id");
 const secure = document.getElementById('secure');
 const sendBtn = document.getElementById('sendBtn');
 const responseView = document.getElementById('responseView');
@@ -9,8 +9,6 @@ let previewImage = document.getElementById('previewImage');
 
 sendBtn.addEventListener('click', async () => {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/";
-    const token = tokenKey.value.trim();
-    const fileId = fileNum.value.trim();
     const secureMode = secure.value.trim();
     let previewUrl = "";
 

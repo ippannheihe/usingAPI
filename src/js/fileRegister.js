@@ -1,17 +1,13 @@
-const tokenKey = document.getElementById('tokenKey');
+//const tokenKey = document.getElementById('tokenKey');
+const token = sessionStorage.getItem("token");
 const iFiles = document.getElementById('imageId');
 const sendBtn = document.getElementById('sendBtn');
 const responseView = document.getElementById('responseView');
 
 sendBtn.addEventListener('click', async () => {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/image";
-    const token = tokenKey.value.trim();
     const imageFile = iFiles.files[0];
 
-    if (!url) {
-        alert('API URL を入力してください');
-        return;
-    }
     if (!iFiles.files.length) {
         alert('画像ファイルを選択してください');
         return;
@@ -41,7 +37,7 @@ sendBtn.addEventListener('click', async () => {
 
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
-
+        sessionStorage.setItem("file_id", resJson.file_id);
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
