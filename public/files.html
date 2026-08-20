@@ -2,13 +2,12 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ファイルのプレビュー</title>
+    <title>ファイルの情報取得</title>
     <link rel="stylesheet" href="../src/css/style.css">
 </head>
 <body>
-<h1>ファイルのプレビューを見る(改装予定)</h1>
+<h1>ファイルの一覧情報を取得する</h1>
 <br>
-<!-- JSONテキスト入力欄 -->
 <label>Tokenの入力
     <br>
     <input id="tokenKey"
@@ -16,13 +15,13 @@
     <br><br>
 </label>
 <label>
-    fileId入力:
+    取得したいファイルリストの最大件数の指定
     <br>
-    <input id="fileId" value="1605785">
+    <input id="limit" value="0">
 </label>
 <br><br>
 <label>
-    レスポンスのpreview_urlがセキュリティ強化モードかを指定します。<li>
+    レスポンスのthumbnail_urlsがセキュリティ強化モードかを指定します。<li>
     <select id="secure">
         <option value="--">--</option>
         <option value="true">true</option>
@@ -34,9 +33,7 @@
 
 <h2>レスポンス</h2>
 <pre id="responseView">(まだレスポンスはありません)</pre>
-
-<img id="previewImage" alt="">
 <pre id="requestURL"></pre>
-<script src="../src/js/filePreview.js"></script>
+<script src="../src/js/files.js"></script>
 </body>
 </html>

@@ -58,7 +58,7 @@ sendBtn.addEventListener('click', async () => {
         //secure_modeがtrueの場合の処理
         if (secureMode==="true") {
             const resImage = await fetch(ImageUrl, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'X-NWPSToken': token,
                 }
