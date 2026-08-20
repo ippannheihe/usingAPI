@@ -49,6 +49,7 @@ sendBtn.addEventListener('click', async () => {
             const resJson = await res.json();
             requestURL.textContent = filesUrl;
             responseView.textContent = JSON.stringify(resJson, null, 2);
+            sessionStorage.setfileList = ("file_id",JSON.stringify(resJson));
 
 
         } catch

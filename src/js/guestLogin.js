@@ -35,6 +35,7 @@ sendBtn.addEventListener('click', async () => {
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
         sessionStorage.setItem("token", resJson.token);
+        window.location.href = "./fileRegister.html";
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
