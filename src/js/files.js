@@ -49,9 +49,9 @@ sendBtn.addEventListener('click', async () => {
             const resJson = await res.json();
             requestURL.textContent = filesUrl;
             responseView.textContent = JSON.stringify(resJson, null, 2);
-            sessionStorage.setfileList = ("file_id",JSON.stringify(resJson));
+            sessionStorage.setItem("fileList", JSON.stringify(resJson));
 
-
+            console.log(sessionStorage.getItem("fileList"));
         } catch
             (e) {
             responseView.textContent = 'エラー: ' + e.message;
