@@ -49,6 +49,7 @@ sendBtn.addEventListener('click', async () => {
             const resJson = await res.json();
             requestURL.textContent = filesUrl;
             responseView.textContent = JSON.stringify(resJson, null, 2);
+            sessionStorage.removeItem("fileList");
             sessionStorage.setItem("fileList", JSON.stringify(resJson));
 
             console.log(sessionStorage.getItem("fileList"));
