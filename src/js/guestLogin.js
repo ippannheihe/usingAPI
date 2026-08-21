@@ -32,7 +32,7 @@ sendBtn.addEventListener('click', async () => {
         sessionStorage.setItem("token", resJson.token);
 
         sessionStorage.setItem('limit', String(0));
-        window.location.href = "./fileRegister.html";
+       // window.location.href = "./fileRegister.html";
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }

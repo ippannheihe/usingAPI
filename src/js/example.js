@@ -5,8 +5,6 @@ const previewImage = document.getElementById('previewImage');
 
 sendBtn.addEventListener('click', async () => {
     const img = document.createElement("img");
-let  image = await PreviewAPI(fileId, responseView, token, requestURL);
+let  image = await PreviewAPI(fileId,token,responseView, requestURL);
 console.log("これ",image);
-    img.src = URL.createObjectURL(image);
-    previewImage.appendChild = (img);
 });
