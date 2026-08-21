@@ -1,10 +1,8 @@
 const token = sessionStorage.getItem("token");
-const secure = document.getElementById('secure');
 const sendBtn = document.getElementById('sendBtn');
 let responseView = document.getElementById('responseView');
 let requestURL = document.getElementById('requestURL');
 const previewImage = document.getElementById('previewImage');
-
 
 const fileListData = JSON.parse(sessionStorage.getItem("fileList"));
 const fileList = fileListData.file_list;
@@ -12,79 +10,68 @@ previewImage.innerHTML = "";
 console.log(fileList);
 sendBtn.addEventListener('click', async () => {
 
-        if (!token) {
-            alert('NWPSTokenを入力してください');
-            return;
-        }
-
-        const url = "https://api.networkprint.jp/nwpsapi/v2/files/";
-        const secureMode = secure.value.trim();
-        let previewUrl = "";
-
-
-        try {
-//画像のプレビューを量産する
-            for (const file of fileList) {
-                console.log(fileList[0]);
-                console.log(file.file_id);
-
-                if (secureMode === "true" || secureMode === "false") {
-                    const pre = '?secure_mode=' + secureMode;
-                    previewUrl = url + file.file_id + '/previews' + pre;
-                } else {
-                    previewUrl = url + file.file_id + '/previews';
-                }
-
-                // fetchでGET送信
-                const res = await fetch(previewUrl, {
-                    method: 'GET',
-                    headers: {
-                        'X-NWPSToken': token,
-                        //
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (!res.ok) {
-                    const errText = await res.text();
-                    console.log("まえージ", errText);
-                    responseView.textContent =
-                        `HTTPエラー: ${res.status}\n\n` + errText;
-                    continue;
-                }
-
-                const resJson = await res.json();
-                console.log("結果a:", resJson);
-                requestURL.textContent = previewUrl;
-                const ImageUrl = await resJson.preview_url;
-                console.log("結果いめ:", ImageUrl);
-                responseView.textContent = JSON.stringify(resJson, null, 2);
-
-                //secure_modeがtrueの場合の処理
-                const img = document.createElement("img");
-                if (secureMode === "true") {
-                    const resImage = await fetch(ImageUrl, {
-                        method: 'GET',
-                        headers: {
-                            'X-NWPSToken': token,
-                        }
-                    });
-                    console.log("なかージ", resImage);
-
-                    const ImageBlob = await resImage.blob();
-                    console.log("結果a:", ImageBlob.text());
-                    img.src = URL.createObjectURL(ImageBlob);
-                } else {
-                    img.src = ImageUrl;
-                }
-                requestURL.textContent = previewUrl;
-                previewImage.appendChild(img);
-
-            }
-        } catch
-            (e) {
-            responseView.textContent = 'エラー: ' + e.message;
-        }
+    if (!token) {
+        alert('NWPSTokenを入力してください');
+        return;
     }
-)
-;
+//secure_modeは問答無用でtrueにする
+    const url = "https://api.networkprint.jp/nwpsapi/v2/files/";
+    let previewUrl = "";
+
+
+    try {
+//画像のプレビューを量産する
+        for (const file of fileList) {
+            console.log(fileList[0]);
+            console.log(file.file_id);
+
+            previewUrl = url + file.file_id + '/previews?secure_mode=true';
+            console.log("ぷれび", previewUrl);
+            // fetchでGET送信
+            const res = await fetch(previewUrl, {
+                method: 'GET',
+                headers: {
+                    'X-NWPSToken': token,
+                    //
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (!res.ok) {
+                const errText = await res.text();
+                console.log("まえージ", errText);
+                responseView.textContent =
+                    `HTTPエラー: ${res.status}\n\n` + errText;
+                continue;
+            }
+
+            const resJson = await res.json();
+            console.log("結果a:", resJson);
+            requestURL.textContent = previewUrl;
+            const ImageUrl = await resJson.preview_url;
+            console.log("結果いめ:", ImageUrl);
+            responseView.textContent = JSON.stringify(resJson, null, 2);
+
+            //secure_modeがtrueの場合の処理
+            const img = document.createElement("img");
+
+
+            const resImage = await fetch(ImageUrl, {
+                method: 'GET',
+                headers: {
+                    'X-NWPSToken': token,
+                }
+            });
+            console.log("なかージ", resImage);
+
+            const ImageBlob = await resImage.blob();
+            console.log("結果a:", ImageBlob.text());
+            img.src = URL.createObjectURL(ImageBlob);
+            requestURL.textContent = previewUrl;
+            previewImage.appendChild(img);
+
+        }
+    } catch (e) {
+        responseView.textContent = 'エラー: ' + e.message;
+    }
+});
