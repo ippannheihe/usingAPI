@@ -19,22 +19,19 @@ sendBtn.addEventListener('click', async () => {
     try {
         const jsonData = JSON.parse(text);
         const res = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-NWPSAppKey': token,
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(jsonData)
+            method: 'POST', headers: {
+                'Content-Type': 'application/json', 'X-NWPSAppKey': token, 'Accept': 'application/json'
+            }, body: JSON.stringify(jsonData)
         });
         if (!res.ok) {
             const errText = await res.text();
-            responseView.textContent =
-                `HTTPエラー: ${res.status}\n\n` + errText;
+            responseView.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
         }
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
         sessionStorage.setItem("token", resJson.token);
+
+        sessionStorage.setItem('limit', String(0));
         window.location.href = "./fileRegister.html";
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
