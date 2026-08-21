@@ -1,7 +1,3 @@
-const token = sessionStorage.getItem("token");
-const sendBtn = document.getElementById('sendBtn');
-let responseView = document.getElementById('responseView');
-let requestURL = document.getElementById('requestURL');
 const previewImage = document.getElementById('previewImage');
 
 const fileListData = JSON.parse(sessionStorage.getItem("fileList"));
@@ -10,10 +6,6 @@ previewImage.innerHTML = "";
 console.log(fileList);
 sendBtn.addEventListener('click', async () => {
 
-    if (!token) {
-        alert('NWPSTokenを入力してください');
-        return;
-    }
 //secure_modeは問答無用でtrueにする
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/";
     let previewUrl = "";

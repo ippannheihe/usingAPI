@@ -1,8 +1,4 @@
-//const tokenKey = document.getElementById('tokenKey');
-const token = sessionStorage.getItem("token");
 const iFiles = document.getElementById('imageId');
-const sendBtn = document.getElementById('sendBtn');
-const responseView = document.getElementById('responseView');
 
 sendBtn.addEventListener('click', async () => {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/image";

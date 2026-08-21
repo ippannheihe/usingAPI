@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ファイルの情報取得</title>
     <link rel="stylesheet" href="../src/css/style.css">
+    <script src="../src/js/token.js" defer></script>
 </head>
 <body>
 <h1>ファイルの一覧情報を取得する</h1>
@@ -15,22 +16,14 @@
     <input id="limit" value="0">
 </label>
 <br><br>
-<label>
-    レスポンスのthumbnail_urlsがセキュリティ強化モードかを指定します。
-    <li>
-        <select id="secure">
-            <option value="--">--</option>
-            <option value="true">true</option>
-            <option value="false">false</option>
-        </select></li>
-</label>
-<br><br>
 <button id="sendBtn">送信</button>
 
 <h2>レスポンス</h2>
 <pre id="responseView">(まだレスポンスはありません)</pre>
 <pre id="requestURL"></pre>
+<!--<div id="previewImage"></div>-->
 <script src="../src/js/files.js" defer></script>
+<!--<script src="../src/js/filePreview.js" defer></script>-->
 <a href="preview.html">プレビュー</a>
 <li>
     <a href="fileRegister.html">登録</a>
