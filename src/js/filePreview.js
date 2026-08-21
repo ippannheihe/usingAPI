@@ -61,7 +61,6 @@ sendBtn.addEventListener('click', async () => {
                 responseView.textContent = JSON.stringify(resJson, null, 2);
 
                 //secure_modeがtrueの場合の処理
-   //ほぼ確実にここがなんか悪さしてる
                 const img = document.createElement("img");
                 if (secureMode === "true") {
                     const resImage = await fetch(ImageUrl, {
@@ -71,24 +70,14 @@ sendBtn.addEventListener('click', async () => {
                         }
                     });
                     console.log("なかージ", resImage);
-                    if (!resImage.ok) {
-                        const errText = await resImage.text();
-                        console.log("とるージ", errText);
-                        responseView.textContent =
-                            `HTTPエラー: ${resImage.status}\n\n` + errText;
-                        continue;
-                    }
 
-                    const ImageJson = await resImage.json();
-                    console.log("結果a:", ImageJson);
-                    requestURL.textContent = previewUrl;
-
-                    const trueURL = await ImageJson.preview_url;
-                    img.src = trueURL;
-                    console.log("結果とる:", trueURL);
+                    const ImageBlob = await resImage.blob();
+                    console.log("結果a:", ImageBlob.text());
+                    img.src = URL.createObjectURL(ImageBlob);
                 } else {
                     img.src = ImageUrl;
                 }
+                requestURL.textContent = previewUrl;
                 previewImage.appendChild(img);
 
             }
