@@ -1,5 +1,5 @@
 //プレビューのちっちゃいあぴ
-export async function PreviewAPI(fileId,token,responseView,requestURL) {
+export async function PreviewAPI(fileId, token, responseView) {
     let previewUrl = "";
 
     console.log("ぷれび", previewUrl);
@@ -25,7 +25,6 @@ export async function PreviewAPI(fileId,token,responseView,requestURL) {
 
         const resJson = await res.json();
         console.log("結果a:", resJson);
-        requestURL.textContent = previewUrl;
         const ImageUrl = await resJson.preview_url;
         console.log("結果いめ:", ImageUrl);
         //secure_modeがtrueの場合の処理
@@ -39,16 +38,16 @@ export async function PreviewAPI(fileId,token,responseView,requestURL) {
 
         const ImageBlob = await resImage.blob();
         console.log("結果a:", ImageBlob.text());
-            const img = document.createElement("img");
-            img.src = URL.createObjectURL(ImageBlob);
-            requestURL.textContent = previewUrl;
-            previewImage.appendChild(img);
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(ImageBlob);
+        previewImage.appendChild(img);
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
 }
+
 //げす
-export async function guestLogin(jsonText,tokenKey,responseView) {
+export async function guestLogin(jsonText, tokenKey, responseView) {
 
     const url = "https://api.networkprint.jp/nwpsapi/v2/loginforguest";
     const token = tokenKey.value.trim();
@@ -83,8 +82,9 @@ export async function guestLogin(jsonText,tokenKey,responseView) {
     }
 
 }
+
 //ファイルの一覧
-export async function FilesAPI (token,responseView) {
+export async function FilesAPI(token, responseView) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files?";
     let filesUrl = "";
 
@@ -120,9 +120,9 @@ export async function FilesAPI (token,responseView) {
 }
 
 //ふぁいる登録
-export async function FileRegisterAPI(formData,token,responseView) {
+export async function FileRegisterAPI(formData, token, responseView) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/image";
-   
+
 
     // multipart/form-data の中身を作る
     try {

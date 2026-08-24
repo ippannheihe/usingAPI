@@ -6,4 +6,5 @@ export let limit = Number(sessionStorage.getItem('limit') || 0);
 export const sendBtn = document.getElementById('sendBtn');
 export const responseView = document.getElementById('responseView');
 export let fileList = sessionStorage.getItem('fileList');
+export const fileListData = JSON.parse(sessionStorage.getItem("fileList"));
 export let requestURL = document.getElementById('requestURL');

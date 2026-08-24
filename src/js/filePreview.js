@@ -1,6 +1,8 @@
+import {PreviewAPI} from "./srcParts.js";
+import {token, sendBtn, responseView, fileListData} from "./tokenModule.js";
+
 const previewImage = document.getElementById('previewImage');
 
-const fileListData = JSON.parse(sessionStorage.getItem("fileList"));
 const fileList = fileListData.file_list;
 previewImage.innerHTML = "";
 console.log(fileList);
@@ -10,60 +12,11 @@ sendBtn.addEventListener('click', async () => {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/";
     let previewUrl = "";
 
-
-    try {
 //画像のプレビューを量産する
-        for (const file of fileList) {
-            console.log(fileList[0]);
-            console.log(file.file_id);
-
-            previewUrl = url + file.file_id + '/previews?secure_mode=true';
-            console.log("ぷれび", previewUrl);
-            // fetchでGET送信
-            const res = await fetch(previewUrl, {
-                method: 'GET',
-                headers: {
-                    'X-NWPSToken': token,
-                    //
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (!res.ok) {
-                const errText = await res.text();
-                console.log("まえージ", errText);
-                responseView.textContent =
-                    `HTTPエラー: ${res.status}\n\n` + errText;
-                continue;
-            }
-
-            const resJson = await res.json();
-            console.log("結果a:", resJson);
-            requestURL.textContent = previewUrl;
-            const ImageUrl = await resJson.preview_url;
-            console.log("結果いめ:", ImageUrl);
-            responseView.textContent = JSON.stringify(resJson, null, 2);
-
-            //secure_modeがtrueの場合の処理
-            const img = document.createElement("img");
-
-
-            const resImage = await fetch(ImageUrl, {
-                method: 'GET',
-                headers: {
-                    'X-NWPSToken': token,
-                }
-            });
-            console.log("なかージ", resImage);
-
-            const ImageBlob = await resImage.blob();
-            console.log("結果a:", ImageBlob.text());
-            img.src = URL.createObjectURL(ImageBlob);
-            requestURL.textContent = previewUrl;
-            previewImage.appendChild(img);
-
-        }
-    } catch (e) {
-        responseView.textContent = 'エラー: ' + e.message;
+    for (const file of fileList) {
+        console.log(fileList[0]);
+        console.log(file.file_id);
+        let fileId = file.file_id;
+        let preview = await PreviewAPI(fileId, token, responseView);
     }
 });
