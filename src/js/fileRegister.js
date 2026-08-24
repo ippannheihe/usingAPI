@@ -1,8 +1,8 @@
 import {FileRegisterAPI} from "./srcParts.js";
-import {token, sendBtn, responseView, requestURL} from "./tokenModule.js";
+import {FilesAPI} from "./srcParts.js";
+import {token, sendBtn, responseView,fileList} from "./tokenModule.js";
 const iFiles = document.getElementById('imageId');
 let iFolders = document.getElementById('imageFolder');
-let selectedFiles = [];
 
 console.log("これ", iFiles);
 
@@ -11,9 +11,11 @@ sendBtn.addEventListener('click', async () => {
     const formData = new FormData();
     let imageFile = iFiles.files[0];
     formData.append('file', imageFile);
-    //formData.append('filename', imageFile.name);
     let fileRegister = await FileRegisterAPI(formData, token, responseView);
     console.log("これ", imageFile);
+
+    let fileLists = await FilesAPI (token,responseView);
+    console.log("一覧でたか？",fileLists);
 });
 
 // 複数ファイル選択
@@ -32,23 +34,27 @@ document.getElementById("folderBtn").addEventListener('click', async () => {
     }
 
     for (const file of iFolders) {
-        let i = 0;
         const formData = new FormData();
 
 //コンソールで見たnameは合っているのに  NetworkでPayloadのFormData見ると余計なものついてた
        //  formData.append('file', file);
       //   formData.append('filename', file.name);
+      //複数送ったときにfilenameにフォルダの名前が勝手につくので改めてnameを差し込んだ
          const newFile = new File([file], file.name);
 
 formData.append("file", newFile);
 
            console.log("がす",newFile);
-//    formData.append('filename', imageFile.name);
   console.log("かず",file.name);  
-    console.log("かず",iFolders[i]);  
         let fileRegister = await FileRegisterAPI(formData, token, responseView);
-        console.log("これ", iFolders[[i]]);
         console.log("これ", file);
-        i++;
     }
+    let fileLists = await FilesAPI (token,responseView);
+    console.log("一覧でたか？",fileLists);
 });
+console.log("どこ？",responseView);
+//document.getElementById("responseView").addEventListener('change',async () =>{
+//    if((responseView != まだレスポンスはありません)){
+// let fileLists = await FilesAPI (token,responseView,'')
+// console.log("一覧でたか？",fileLists) }
+//});

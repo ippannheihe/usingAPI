@@ -84,7 +84,7 @@ export async function guestLogin(jsonText,tokenKey,responseView) {
 
 }
 //ファイルの一覧
-export async function FilesAPI (token,responseView,requestURL) {
+export async function FilesAPI (token,responseView) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files?";
     let filesUrl = "";
 
@@ -109,7 +109,6 @@ export async function FilesAPI (token,responseView,requestURL) {
         }
 
         const resJson = await res.json();
-        requestURL.textContent = filesUrl;
         responseView.textContent = JSON.stringify(resJson, null, 2);
         sessionStorage.removeItem("fileList");
         sessionStorage.setItem("fileList", JSON.stringify(resJson));
