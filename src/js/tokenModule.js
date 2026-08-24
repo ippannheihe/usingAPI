@@ -1,4 +1,6 @@
 // token.js のモジュール版（example.js など module スクリプトから利用する）
+export const tokenKey = document.getElementById('tokenKey');
+export const jsonText = document.getElementById('jsonText');
 export const token = sessionStorage.getItem('token');
 export let limit = Number(sessionStorage.getItem('limit') || 0);
 export const sendBtn = document.getElementById('sendBtn');

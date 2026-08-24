@@ -48,16 +48,47 @@ export async function PreviewAPI(fileId,token,responseView,requestURL) {
     }
 }
 //げす
-//ファイルの一覧
-export async function FilesAPI (limit,token,responseView,requestURL) {
-    const url = "https://api.networkprint.jp/nwpsapi/v2/files?file_type=ALL&offset=0";
-    let filesUrl = "";
+export async function guestLogin(jsonText,tokenKey,responseView) {
 
-    if (limit < 1) {
-        alert('1以上の値を指定してください');
+    const url = "https://api.networkprint.jp/nwpsapi/v2/loginforguest";
+    const token = tokenKey.value.trim();
+    const text = jsonText.value.trim();
+
+    if (!text) {
+        alert('送信する JSON を入力してください');
         return;
     }
-    const urlLimit = url + "&limit=" + limit;
+    if (!token) {
+        alert('AppKeyを入力してください');
+        return;
+    }
+    try {
+        const jsonData = JSON.parse(text);
+        const res = await fetch(url, {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json', 'X-NWPSAppKey': token, 'Accept': 'application/json'
+            }, body: JSON.stringify(jsonData)
+        });
+        if (!res.ok) {
+            const errText = await res.text();
+            responseView.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
+        }
+        const resJson = await res.json();
+        responseView.textContent = JSON.stringify(resJson, null, 2);
+        sessionStorage.setItem("token", resJson.token);
+
+        window.location.href = "./fileRegister.html";
+    } catch (e) {
+        responseView.textContent = 'エラー: ' + e.message;
+    }
+
+}
+//ファイルの一覧
+export async function FilesAPI (token,responseView,requestURL) {
+    const url = "https://api.networkprint.jp/nwpsapi/v2/files?";
+    let filesUrl = "";
+
+    const urlLimit = url + '';
 
     filesUrl = urlLimit + '&secure_mode=true';
 
@@ -90,15 +121,11 @@ export async function FilesAPI (limit,token,responseView,requestURL) {
 }
 
 //ふぁいる登録
-export async function FileRegisterAPI(iFiles,token,responseView,limit) {
+export async function FileRegisterAPI(formData,token,responseView) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/image";
-    const imageFile = iFiles.files[0];
-    let count = limit;
+   
 
     // multipart/form-data の中身を作る
-    const formData = new FormData();
-    formData.append('file', imageFile);
-
     try {
 
         // fetchでPOST送信
@@ -116,12 +143,10 @@ export async function FileRegisterAPI(iFiles,token,responseView,limit) {
 
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
-        sessionStorage.setItem("file_id", resJson.file_id);
-        console.log(typeof count, count);
-        count++;
-        sessionStorage.removeItem('limit');
-        sessionStorage.setItem('limit', String(count));
-        console.log("これかう" + sessionStorage.getItem('limit'));
+        //sessionStorage.setItem("file_id", resJson.file_id);
+//console.log(typeof count, count);
+       // count++;
+       // console.log("これかう" + sessionStorage.getItem('limit'));
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
