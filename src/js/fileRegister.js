@@ -30,24 +30,21 @@ document.getElementById("folderBtn").addEventListener('click', async () => {
         console.log("ファイルが選択されていません");
         return;
     }
-//  4項目目を消したい
-let fileInfo = {
-  name: iFolders.name,
-  lastModified: iFolders.lastModified,
-  lastModifiedDate: iFolders.lastModifiedDate,
-  size: iFolders.size,
-  type: iFolders.type
-  // webkitRelativePath は入れない
-};
 
-    for (const file of fileInfo) {
+    for (const file of iFolders) {
         let i = 0;
         const formData = new FormData();
 
+//コンソールで見たnameは合っているのに  NetworkでPayloadのFormData見ると余計なものついてた
+       //  formData.append('file', file);
+      //   formData.append('filename', file.name);
+         const newFile = new File([file], file.name);
 
-         formData.append('file', file);
+formData.append("file", newFile);
+
+           console.log("がす",newFile);
 //    formData.append('filename', imageFile.name);
-  console.log("かず",iFolders);  
+  console.log("かず",file.name);  
     console.log("かず",iFolders[i]);  
         let fileRegister = await FileRegisterAPI(formData, token, responseView);
         console.log("これ", iFolders[[i]]);
