@@ -143,10 +143,7 @@ export async function FileRegisterAPI(formData,token,responseView) {
 
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
-        //sessionStorage.setItem("file_id", resJson.file_id);
-//console.log(typeof count, count);
-       // count++;
-       // console.log("これかう" + sessionStorage.getItem('limit'));
+        sessionStorage.setItem("file_id", resJson.file_id);
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
