@@ -31,7 +31,6 @@ sendBtn.addEventListener('click', async () => {
 
         //ファイルの一覧として保存する
         let fileLists = await FilesAPI(token, responseView, requestURL);
-        console.log("一覧でたか？", fileLists);
         //複数ジ
     } else if (iFolders.files.length > 0) {
 console.log("ざす",iFolders.files.length );
@@ -52,8 +51,6 @@ console.log("ざす",iFolders.files.length );
             nameTag.textContent = file.name;
             previewImage.appendChild(nameTag);
             let image = await PreviewAPI(fileId, token, responseView);
-
-
             let fileLists = await FilesAPI(token, responseView, requestURL);
         }
     } else {

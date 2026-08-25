@@ -31,3 +31,11 @@ pre {
     padding: 8px;
     text-align: center;
 }
+button[id="conQRCode"] {
+    width: 300px;
+    height: 300px;
+ float: right;
+}
+.hide{
+    display: none;
+}

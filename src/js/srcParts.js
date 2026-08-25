@@ -152,7 +152,7 @@ export async function FileRegisterAPI(formData, token, responseView) {
     }
 }
 //QRコード
- export async function loginQRCodeAPI(token,responseView,){
+ export async function loginQRCodeAPI(token,responseView){
      try {
          const conQRCode = document.getElementById('conQRCode');
         const resQR = await fetch("https://api.networkprint.jp/nwpsapi/v2/login/qrcode", {
