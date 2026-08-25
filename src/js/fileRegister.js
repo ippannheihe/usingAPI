@@ -1,6 +1,6 @@
 import {FileRegisterAPI} from "./srcParts.js";
 import {FilesAPI} from "./srcParts.js";
-import {token, sendBtn, responseView,fileList} from "./tokenModule.js";
+import {token, sendBtn, responseView,fileList,requestURL} from "./tokenModule.js";
 const iFiles = document.getElementById('imageId');
 let iFolders = document.getElementById('imageFolder');
 
@@ -14,7 +14,7 @@ sendBtn.addEventListener('click', async () => {
     let fileRegister = await FileRegisterAPI(formData, token, responseView);
     console.log("これ", imageFile);
 
-    let fileLists = await FilesAPI (token,responseView);
+    let fileLists = await FilesAPI (token,responseView,requestURL);
     console.log("一覧でたか？",fileLists);
 });
 
@@ -49,12 +49,12 @@ formData.append("file", newFile);
         let fileRegister = await FileRegisterAPI(formData, token, responseView);
         console.log("これ", file);
     }
-    let fileLists = await FilesAPI (token,responseView);
+    let fileLists = await FilesAPI (token,responseView,requestURL);
     console.log("一覧でたか？",fileLists);
 });
 console.log("どこ？",responseView);
-//document.getElementById("responseView").addEventListener('change',async () =>{
-//    if((responseView != まだレスポンスはありません)){
-// let fileLists = await FilesAPI (token,responseView,'')
-// console.log("一覧でたか？",fileLists) }
-//});
+document.getElementById("responseView").addEventListener('change',async () =>{
+    if((responseView != まだレスポンスはありません)){
+ let fileLists = await FilesAPI (token,responseView,'')
+ console.log("一覧でたか？",fileLists) }
+});

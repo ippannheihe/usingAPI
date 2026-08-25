@@ -1,3 +1,5 @@
+import {fileList} from "./tokenModule.js";
+
 //プレビューのちっちゃいあぴ
 export async function PreviewAPI(fileId, token, responseView) {
     let previewUrl = "";
@@ -84,7 +86,7 @@ export async function guestLogin(jsonText, tokenKey, responseView) {
 }
 
 //ファイルの一覧
-export async function FilesAPI(token, responseView) {
+export async function FilesAPI(token, responseView, requestURL) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files?";
     let filesUrl = "";
 
@@ -110,9 +112,10 @@ export async function FilesAPI(token, responseView) {
 
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
+        requestURL
         sessionStorage.removeItem("fileList");
         sessionStorage.setItem("fileList", JSON.stringify(resJson));
-
+        console.log("名前",fileList.original_filename);
         console.log(sessionStorage.getItem("fileList"));
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
@@ -147,3 +150,24 @@ export async function FileRegisterAPI(formData, token, responseView) {
         responseView.textContent = 'エラー: ' + e.message;
     }
 }
+//QRコード
+ export async function loginQRCodeAPI(token,responseView,){
+     try {
+         const conQRCode = document.getElementById('conQRCode');
+        const resQR = await fetch("https://api.networkprint.jp/nwpsapi/v2/login/qrcode", {
+            method: 'GET', headers: {
+          'X-NWPSToken': token, 'Accept': 'image/jpeg'
+            }
+        });
+        console.log("動く？");
+        const resBlob = await resQR.blob();
+        // console.log("結果a:", resBlob.text());
+       //  document.getElementById('QRCode').src = URL.createObjectURL(resBlob);
+         const img = document.createElement("img");
+         img.src = URL.createObjectURL(resBlob);
+         conQRCode.appendChild(img);
+         console.log("疎通");
+     } catch (e) {
+        responseView.textContent = 'エラー: ' + e.message;
+    }
+ }
