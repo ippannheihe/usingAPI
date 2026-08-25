@@ -6,6 +6,7 @@ const iFiles = document.getElementById('imageId');
 let iFolders = document.getElementById('imageFolder');
 
 
+
 sendBtn.addEventListener('click', async () => {
     console.log("これ", iFiles.files[0]);
 
@@ -35,6 +36,8 @@ sendBtn.addEventListener('click', async () => {
     } else if (iFolders.files.length > 0) {
 console.log("ざす",iFolders.files.length );
         for (const file of iFolders.files) {
+            let fileId = sessionStorage.getItem('file_id');
+            console.log("あで",fileId);
             const formData = new FormData();
 //デフォルトのfilename属性が不適切なためフォーマットの正しいname属性の値を新しくfilename属性として入れなおす
             const newFile = new File([file], file.name);
@@ -42,14 +45,12 @@ console.log("ざす",iFolders.files.length );
             console.log("がす", newFile);
             console.log("かず", file.name);
             console.log("きず", iFolders.files);
-            let fileRegister = await FileRegisterAPI(formData, token, responseView);
-            console.log("どす", fileRegister);
+            await FileRegisterAPI(formData, token, responseView);
+            console.log("どす", file.name, "登録完了");
             //ファイルの一覧として保存する
             const nameTag = document.createElement("li");
             nameTag.textContent = file.name;
             previewImage.appendChild(nameTag);
-            let fileId = sessionStorage.getItem('file_Id');
-            console.log("いで",fileId);
             let image = await PreviewAPI(fileId, token, responseView);
 
 
