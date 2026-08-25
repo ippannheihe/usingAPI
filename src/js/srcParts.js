@@ -111,11 +111,10 @@ export async function FilesAPI(token, responseView, requestURL) {
         }
 
         const resJson = await res.json();
-        responseView.textContent = JSON.stringify(resJson, null, 2);
-        requestURL
+        //変更
+        //console.log(responseView.textContent = JSON.stringify(resJson, null, 2));
         sessionStorage.removeItem("fileList");
         sessionStorage.setItem("fileList", JSON.stringify(resJson));
-        console.log("名前",fileList.original_filename);
         console.log(sessionStorage.getItem("fileList"));
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
@@ -132,8 +131,9 @@ export async function FileRegisterAPI(formData, token, responseView) {
 
         // fetchでPOST送信
         const res = await fetch(url, {
-            method: 'POST', headers: {
-                'X-NWPSToken': token, 'Accept': 'application/json',
+            method: 'POST',
+            headers: {
+                'X-NWPSToken': token, 'Accept': 'application/json'
             }, body: formData
         });
 
@@ -144,7 +144,9 @@ export async function FileRegisterAPI(formData, token, responseView) {
         }
 
         const resJson = await res.json();
+        console.log("名前",resJson.filename);
         responseView.textContent = JSON.stringify(resJson, null, 2);
+        sessionStorage.removeItem("file_id");
         sessionStorage.setItem("file_id", resJson.file_id);
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
@@ -171,3 +173,5 @@ export async function FileRegisterAPI(formData, token, responseView) {
         responseView.textContent = 'エラー: ' + e.message;
     }
  }
+
+

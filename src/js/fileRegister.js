@@ -1,60 +1,64 @@
-import {FileRegisterAPI} from "./srcParts.js";
+import {FileRegisterAPI, PreviewAPI} from "./srcParts.js";
 import {FilesAPI} from "./srcParts.js";
-import {token, sendBtn, responseView,fileList,requestURL} from "./tokenModule.js";
+import {token, sendBtn, responseView, fileList, requestURL,previewImage} from "./tokenModule.js";
+
 const iFiles = document.getElementById('imageId');
 let iFolders = document.getElementById('imageFolder');
 
-console.log("これ", iFiles);
 
-// 単数ファイル送信
 sendBtn.addEventListener('click', async () => {
-    const formData = new FormData();
-    let imageFile = iFiles.files[0];
-    formData.append('file', imageFile);
-    let fileRegister = await FileRegisterAPI(formData, token, responseView);
-    console.log("これ", imageFile);
+    console.log("これ", iFiles.files[0]);
 
-    let fileLists = await FilesAPI (token,responseView,requestURL);
-    console.log("一覧でたか？",fileLists);
-});
 
-// 複数ファイル選択
-document.getElementById('imageFolder').addEventListener("change", (e) => {
-   iFolders = e.target.files;
+    if (iFiles.files.length > 0) {
+        //単体ジ
+        let imageFile = iFiles.files[0];
+        console.log("それ",imageFile);
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        let fileRegister = await FileRegisterAPI(formData, token, responseView);
+        console.log("これ", imageFile);
 
-    console.log("選択されたファイル数:", iFolders.length);
-    console.log("選択されたファイル数:", e.target.files);
-});
+        console.log("あれ", imageFile.name);
+        const nameTag = document.createElement("li");
+        nameTag.textContent = imageFile.name;
 
-// 複数ファイル送信
-document.getElementById("folderBtn").addEventListener('click', async () => {
-    if (iFolders.length === 0) {
-        console.log("ファイルが選択されていません");
+        previewImage.appendChild(nameTag);
+         let fileId = sessionStorage.getItem("file_id");
+
+        let image = await PreviewAPI(fileId, token, responseView);
+
+        //ファイルの一覧として保存する
+        let fileLists = await FilesAPI(token, responseView, requestURL);
+        console.log("一覧でたか？", fileLists);
+        //複数ジ
+    } else if (iFolders.files.length > 0) {
+console.log("ざす",iFolders.files.length );
+        for (const file of iFolders.files) {
+            const formData = new FormData();
+//デフォルトのfilename属性が不適切なためフォーマットの正しいname属性の値を新しくfilename属性として入れなおす
+            const newFile = new File([file], file.name);
+            formData.append("file", newFile);
+            console.log("がす", newFile);
+            console.log("かず", file.name);
+            console.log("きず", iFolders.files);
+            let fileRegister = await FileRegisterAPI(formData, token, responseView);
+            console.log("どす", fileRegister);
+            //ファイルの一覧として保存する
+            const nameTag = document.createElement("li");
+            nameTag.textContent = file.name;
+            previewImage.appendChild(nameTag);
+            let fileId = sessionStorage.getItem('file_Id');
+            console.log("いで",fileId);
+            let image = await PreviewAPI(fileId, token, responseView);
+
+
+            let fileLists = await FilesAPI(token, responseView, requestURL);
+        }
+    } else {
+        alert("どちらにもファイルが入っていません");
         return;
     }
 
-    for (const file of iFolders) {
-        const formData = new FormData();
 
-//コンソールで見たnameは合っているのに  NetworkでPayloadのFormData見ると余計なものついてた
-       //  formData.append('file', file);
-      //   formData.append('filename', file.name);
-      //複数送ったときにfilenameにフォルダの名前が勝手につくので改めてnameを差し込んだ
-         const newFile = new File([file], file.name);
-
-formData.append("file", newFile);
-
-           console.log("がす",newFile);
-  console.log("かず",file.name);  
-        let fileRegister = await FileRegisterAPI(formData, token, responseView);
-        console.log("これ", file);
-    }
-    let fileLists = await FilesAPI (token,responseView,requestURL);
-    console.log("一覧でたか？",fileLists);
-});
-console.log("どこ？",responseView);
-document.getElementById("responseView").addEventListener('change',async () =>{
-    if((responseView != まだレスポンスはありません)){
- let fileLists = await FilesAPI (token,responseView,'')
- console.log("一覧でたか？",fileLists) }
 });
