@@ -5,14 +5,36 @@
     <meta charset="UTF-8">
     <title>いろいろ</title>
     <link rel="stylesheet" href="../src/css/style.css">
+    <script type="module" src="../src/js/pageCheck.js" defer></script>
 </head>
 <body>
 <h1>いろいろ</h1>
+<nav>
+    <ul>
+        <li><a href="fileRegister.html">登録</a></li>
+        <li><a href="files.html">ファイル一覧</a></li>
+        <li><a href="preview.html">プレビュー</a></li>
+        <li><a href="home.html">いろいろ</a></li>
+    </ul>
+</nav>
+<br>
 
+<button id="openModalBtn">お知らせはこちら</button>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+        <h2>ここに入れたい</h2>
+        <p id="notice"></p>
+    </div>
+</div>
+<br>
+<br>
+<br>
 <br>
 <label>
     JSON入力:
-    <br>
+<li>
     <textarea id="jsonText">
 {
 "app_key": "28ce617e-af8b-4110-9eb7-c4ea165c43fe"
@@ -22,19 +44,7 @@
 <br>
 <button id="sendBtn">送信</button>
 <h2>レスポンス</h2>
-<pre id="responseView">(まだレスポンスはありません)</pre>
-
-<div id="previewImage"></div>
-<pre id="requestURL"></pre>
+<a href="responseView">(まだレスポンスはありません)</a>
 <script type="module" src="../src/js/pageCheck.js" defer></script>
-<a href="files.html">一覧</a>
-<li>
-    <a href="fileRegister.html">登録</a>
-<li>
-    <a href="example.html">ため</a>
-<li>
-    <a href="menu.html">お知らせ</a>
-<li>
-
 </body>
 </html>

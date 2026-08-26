@@ -1,5 +1,6 @@
 export const tokenKey = document.getElementById('tokenKey');
 export const jsonText = document.getElementById('jsonText');
+export const notice = document.getElementById('notice');
 export const appKey = sessionStorage.getItem('appKey');
 export const token = sessionStorage.getItem('token');
 export let limit = Number(sessionStorage.getItem('limit') || 0);

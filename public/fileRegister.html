@@ -8,35 +8,36 @@
 </head>
 <body>
 <h1>ファイルの画像を登録できる</h1>
-<br>
 <!-- 画像ファイル入力欄 -->
+<nav>
+    <ul>
+        <li><a href="fileRegister.html">登録</a></li>
+        <li><a href="files.html">ファイル一覧</a></li>
+        <li><a href="preview.html">プレビュー</a></li>
+        <li><a href="home.html">いろいろ</a></li>
+    </ul>
+</nav>
+<br>
+    <label>
+        画像ファイル選択
+        <li>
+            <input type="file" id="imageId"></li>
+    </label>
+    <br><br>
+    <label>
+        フォルダ選択(Chrome/Edge/Operaなどに限る)
+        <li>
+            <input type="file" webkitdirectory id="imageFolder"></li>
+    </label>
+    <br><br>
 
-<label>
-    画像ファイル選択
-    <li>
-        <input type="file" id="imageId"></li>
-</label>
-<br><br>
-<label>
-    フォルダ選択(Chrome/Edge/Operaなどに限る)
-    <li>
-        <input type="file" webkitdirectory id="imageFolder"></li>
-</label>
-<br><br>
+    <button id="sendBtn">送信</button>
+    <br><br>
+    <h2>レスポンス</h2>
+    <pre id="responseView">(まだレスポンスはありません)</pre>
+    <div id="previewImage"></div>
+    <script type="module" src="../src/js/fileRegister.js"></script>
 
-<button id="sendBtn">送信</button>
-<br><br>
-<h2>レスポンス</h2>
-<pre id="responseView">(まだレスポンスはありません)</pre>
-<div id="previewImage"></div>
-<script type="module" src="../src/js/fileRegister.js"></script>
-<a href="files.html">一覧</a>
-<li>
-    <a href="preview.html">プレビュー</a>
-<li>
-    <a href="menu.html">お知らせ</a>
-<li>
-    <a href="home.html">ほめ</a>
 
 </body>
 </html>

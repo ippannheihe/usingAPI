@@ -36,6 +36,55 @@ button[id="conQRCode"] {
     height: 300px;
  float: right;
 }
+button[id="sendBtn"] {
+    width: 70px;
+    height: 50px;
+    float: left;
+}
 .hide{
     display: none;
+}
+/*URL関係*/
+nav ul{
+    overflow: hidden;
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style-type: none;
+}
+nav ul li{
+    float: left;
+    width: 200px;
+}
+nav ul li a{
+    overflow: hidden;
+    display: block;
+    padding-top: 35px;
+background-color: black;
+    color: lightsteelblue;
+    font-size: larger;
+
+}
+/*消したりつけたり*/
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px; right: 10px;
+    cursor: pointer;
+    font-size: 20px;
 }

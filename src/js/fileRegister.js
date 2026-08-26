@@ -2,7 +2,7 @@ import {FileRegisterAPI, PreviewAPI} from "./srcParts.js";
 import {FilesAPI} from "./srcParts.js";
 import {token, sendBtn, responseView, fileList, requestURL,previewImage} from "./tokenModule.js";
 
-const iFiles = document.getElementById('imageId');
+let iFiles = document.getElementById('imageId');
 let iFolders = document.getElementById('imageFolder');
 
 
@@ -31,12 +31,12 @@ sendBtn.addEventListener('click', async () => {
 
         //ファイルの一覧として保存する
         let fileLists = await FilesAPI(token, responseView, requestURL);
+        console.log("あいで",sessionStorage.getItem("file_id"));
+        iFiles.replace(image);
         //複数ジ
     } else if (iFolders.files.length > 0) {
 console.log("ざす",iFolders.files.length );
         for (const file of iFolders.files) {
-            let fileId = sessionStorage.getItem('file_id');
-            console.log("あで",fileId);
             const formData = new FormData();
 //デフォルトのfilename属性が不適切なためフォーマットの正しいname属性の値を新しくfilename属性として入れなおす
             const newFile = new File([file], file.name);
@@ -50,8 +50,11 @@ console.log("ざす",iFolders.files.length );
             const nameTag = document.createElement("li");
             nameTag.textContent = file.name;
             previewImage.appendChild(nameTag);
+            let fileId = sessionStorage.getItem('file_id');
             let image = await PreviewAPI(fileId, token, responseView);
             let fileLists = await FilesAPI(token, responseView, requestURL);
+
+            console.log("あいで",sessionStorage.getItem("file_id"));
         }
     } else {
         alert("どちらにもファイルが入っていません");

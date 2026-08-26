@@ -1,10 +1,11 @@
 
 import {newsAPI} from "./srcParts.js";
-import {responseView, sendBtn} from "./tokenModule.js";
+import {notice, responseView, sendBtn} from "./tokenModule.js";
 
 sendBtn.addEventListener('click', async () => {
 
-    let menu = await newsAPI(responseView);
+    let menu = await newsAPI(notice);
+
     console.log("これ", menu);
 });
 
