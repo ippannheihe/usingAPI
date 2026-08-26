@@ -195,15 +195,19 @@ export async function newsAPI(responseView) {
     }
 }
 
-export async function pageCheck(jsonText,responseView) {
+export async function pageCheck(token,jsonText,appKey,responseView) {
    const url = 'https://api.networkprint.jp/nwpsparts/previewurl';
+//const part = 'app_key"';
+//let text = '{"' + part + ': '+ appKey+ '}';
+    // const text = loleText.value.trim();
+    const text = jsonText.value.trim();
     try {
-        const text = jsonText.value.trim();
+
         const jsonData = JSON.parse(text);
-       console.log(text);
+        //console.log(jsonData);
         const res = await fetch(url, {
             method: 'POST', headers: {
-                'Content-Type': 'application/json', 'Accept': 'application/json'
+                'Content-Type': 'application/json','X-NWPSToken': token, 'Accept': 'application/json'
             }, body: JSON.stringify(jsonData)
         });
         if (!res.ok) {
