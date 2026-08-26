@@ -77,8 +77,9 @@ export async function guestLogin(jsonText, tokenKey, responseView) {
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
         sessionStorage.setItem("token", resJson.token);
-
-        window.location.href = "./fileRegister.html";
+        sessionStorage.setItem("appKey",token);
+        console.log(sessionStorage.getItem("appKey"));
+        //window.location.href = "./fileRegister.html";
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
@@ -173,4 +174,45 @@ export async function FileRegisterAPI(formData, token, responseView) {
     }
  }
 
+export async function newsAPI(responseView) {
+    
+    const url = "https://api.networkprint.jp/nwpsapi/v2/news/ja";
+    
+    try {
+        const res = await fetch(url, {
+            method: 'GET', headers: {
+                'Content-Type': 'application/json','Accept': 'application/json'
+            },
+        });
+        if (!res.ok) {
+            const errText = await res.text();
+            responseView.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
+        }
+        const resJson = await res.json();
+        responseView.textContent = JSON.stringify(resJson, null, 2);
+    } catch (e) {
+        responseView.textContent = 'エラー: ' + e.message;
+    }
+}
 
+export async function pageCheck(jsonText,responseView) {
+   const url = 'https://api.networkprint.jp/nwpsparts/previewurl';
+    try {
+        const text = jsonText.value.trim();
+        const jsonData = JSON.parse(text);
+       console.log(text);
+        const res = await fetch(url, {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json', 'Accept': 'application/json'
+            }, body: JSON.stringify(jsonData)
+        });
+        if (!res.ok) {
+            const errText = await res.text();
+            responseView.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
+        }
+        const resJson = await res.json();
+        responseView.textContent = JSON.stringify(resJson, null, 2);
+    } catch (e) {
+        responseView.textContent = 'エラー: ' + e.message;
+    }
+}

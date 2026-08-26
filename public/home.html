@@ -1,15 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ファイルのプレビュー</title>
+    <title>いろいろ</title>
     <link rel="stylesheet" href="../src/css/style.css">
 </head>
 <body>
-<h1>ファイルのプレビューを見る(改装予定)</h1>
-<button id="conQRCode" ></button>
-<script type="module" src="../src/js/QRCode.js" defer></script>
+<h1>いろいろ</h1>
+
 <br>
+<label>
+    JSON入力:
+    <br>
+    <textarea id="jsonText">
+{
+"app_key": "28ce617e-af8b-4110-9eb7-c4ea165c43fe"
+}
+    </textarea>
+</label>
 <br>
 <button id="sendBtn">送信</button>
 <h2>レスポンス</h2>
@@ -17,7 +26,7 @@
 
 <div id="previewImage"></div>
 <pre id="requestURL"></pre>
-<script type="module" src="../src/js/filePreview.js" defer></script>
+<script type="module" src="../src/js/pageCheck.js" defer></script>
 <a href="files.html">一覧</a>
 <li>
     <a href="fileRegister.html">登録</a>
