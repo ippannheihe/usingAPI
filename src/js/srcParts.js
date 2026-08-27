@@ -75,9 +75,10 @@ export async function guestLogin(jsonText, tokenKey, responseView) {
         const resJson = await res.json();
         responseView.textContent = JSON.stringify(resJson, null, 2);
         sessionStorage.setItem("token", resJson.token);
+        sessionStorage.setItem("user_code", resJson.user_code);
         sessionStorage.setItem("appKey", token);
         console.log(sessionStorage.getItem("appKey"));
-     //   window.location.href = "./fileRegister.html";
+        window.location.href = "./fileRegister.html";
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }
@@ -114,7 +115,10 @@ export async function FilesAPI(token, responseView, requestURL) {
         //console.log(responseView.textContent = JSON.stringify(resJson, null, 2));
         sessionStorage.removeItem("fileList");
         sessionStorage.setItem("fileList", JSON.stringify(resJson));
+        sessionStorage.removeItem("total");
+        sessionStorage.setItem("total", JSON.stringify(resJson.total));
            console.log(sessionStorage.getItem("fileList"));
+        console.log(sessionStorage.getItem("total"));
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
     }

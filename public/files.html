@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>ファイルの情報取得</title>
     <link rel="stylesheet" href="../src/css/style.css">
+    <script type="module" src="../src/js/files.js" defer></script>
 </head>
 <body>
 <h1>ファイルの一覧情報を取得する</h1>
+<div><a href="https://api.networkprint.jp/sharp_netprint/ja/information.aspx" target="_blank" rel="noopener noreferrer">お知らせ</a></div>
 <nav>
     <ul>
         <li><a href="fileRegister.html">登録</a></li>
@@ -16,14 +18,9 @@
     </ul>
 </nav>
 <br>
-<button id="sendBtn">送信</button>
-
-<h2>レスポンス</h2>
 <pre id="responseView">(まだレスポンスはありません)</pre>
 <pre id="requestURL"></pre>
-<!--<div id="previewImage"></div>-->
-<script type="module" src="../src/js/files.js" defer></script>
-<!--<script src="../src/js/filePreview.js" defer></script>-->
+<div id="previewImage"></div>
 
 </body>
 </html>

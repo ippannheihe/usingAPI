@@ -9,6 +9,7 @@ let iFolders = document.getElementById('imageFolder');
 
 sendBtn.addEventListener('click', async () => {
     console.log("これ", iFiles.files[0]);
+    document.getElementById("previewImage").value = "";
 
 
     if (iFiles.files.length > 0) {
@@ -22,7 +23,7 @@ sendBtn.addEventListener('click', async () => {
 
         console.log("あれ", imageFile.name);
         const nameTag = document.createElement("li");
-        nameTag.textContent = imageFile.name;
+        nameTag.textContent = "ファイル名"+imageFile.name;
 
         previewImage.appendChild(nameTag);
          let fileId = sessionStorage.getItem("file_id");
@@ -32,7 +33,7 @@ sendBtn.addEventListener('click', async () => {
         //ファイルの一覧として保存する
         let fileLists = await FilesAPI(token, responseView, requestURL);
         console.log("あいで",sessionStorage.getItem("file_id"));
-        iFiles.replace(image);
+        document.getElementById("imageId").value = "";
         //複数ジ
     } else if (iFolders.files.length > 0) {
 console.log("ざす",iFolders.files.length );
@@ -56,6 +57,7 @@ console.log("ざす",iFolders.files.length );
 
             console.log("あいで",sessionStorage.getItem("file_id"));
         }
+        document.getElementById("imageFolder").value = "";
     } else {
         alert("どちらにもファイルが入っていません");
         return;

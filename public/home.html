@@ -6,9 +6,11 @@
     <title>いろいろ</title>
     <link rel="stylesheet" href="../src/css/style.css">
     <script type="module" src="../src/js/pageCheck.js" defer></script>
+    <script type="module" src="../src/js/QRCode.js" defer></script>
 </head>
 <body>
 <h1>いろいろ</h1>
+<div><a href="https://api.networkprint.jp/sharp_netprint/ja/information.aspx" target="_blank" rel="noopener noreferrer">お知らせ</a></div>
 <nav>
     <ul>
         <li><a href="fileRegister.html">登録</a></li>
@@ -18,22 +20,22 @@
     </ul>
 </nav>
 <br>
+<div>ユーザー番号とコンビニで使うQRコードはここ</div>
+<button id="openModalBtn">QRコードを表示</button>
 
-<button id="openModalBtn">お知らせはこちら</button>
+<!--<button id="conQRCode"></button>-->
 
-<button id="conQRCode"></button>
-<script type="module" src="../src/js/QRCode.js" defer></script>
 <div id="modal" class="modal">
     <div class="modal-content">
         <span id="closeModalBtn" class="close">&times;</span>
-        <h2>ここに入れたい</h2>
-        <p id="notice"></p>
+        <p>ユーザー番号</p>
+        <p id="userNumber"></p>
+        <p id="conQRCode"></p>
+        <p><a href="https://networkprint.ne.jp/info/howto/qrcode_login.html">ご利用方法</a></p>
     </div>
 </div>
 <br>
-<br>
-<br>
-<br>
+<pre><a href="https://api.networkprint.jp/sharp_netprint/ja/information.aspx" target="_blank" rel="noopener noreferrer">お店での印刷方法はこちら</a> </pre>
 <label>
     JSON入力:
 <li>
@@ -45,8 +47,6 @@
 </label>
 <br>
 <button id="sendBtn">送信</button>
-<h2>レスポンス</h2>
 <a href="responseView">(まだレスポンスはありません)</a>
-<script type="module" src="../src/js/pageCheck.js" defer></script>
 </body>
 </html>
