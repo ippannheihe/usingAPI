@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <title>ゲストログイン(ランダムプリント有効化予定)</title>
     <link rel="stylesheet" href="../src/css/style.css">
+    <script type="module" src="../src/js/guestLogin.js" defer></script>
 </head>
 <body>
-<h1>ゲストログイン用〇〇</h1>
+<nav>
+    <ul>
+        <li><img src="../public/asset/img/logo_family-CInHIkFU.png" alt=""></li>
+        <li><img src="../public/asset/img/download.png" alt=""></li>
+        <li><img src="../public/asset/img/logo_ministop-Bl-2nnTP.png" alt=""></li>
+        <li><img src="../public/asset/img/logo_lawson-BrpsOGFo.png" alt=""></li>
+    </ul>
+</nav>
+<h1>コンビニで簡単ランダムプリント</h1>
 <br>
-<h2>レスポンス</h2>
-<pre id="responseView">(まだレスポンスはありません)</pre>
+<p>ファイルを登録し、コンビニのマルチコピー機でプリントするためのユーザー番号を発行します。
+    会員登録は不要です。
+<p>
+<pre id="responseView"></pre>
 
-<script type="module" src="../src/js/guestLogin.js" defer></script>
-
-<!-- JSONテキスト入力欄 -->
 <label>APPkeyの入力
     <br>
     <input id="tokenKey"
@@ -35,8 +43,23 @@
 }
     </textarea>
 </label>
+<br><br>
 <br>
-<button id="sendBtn">ログイン</button>
+
+<div id="manual">
+    ご利用いただくにあたり、
+    <a href="https://networkprint.ne.jp/Lite/terms.html">「ネットワークプリントサービス利用規約」</a>
+    および
+    <a href="https://smj.jp.sharp/bs/contact/networkprint/">「ネットワークプリント個人情報取り扱いについて」</a>
+    をご確認いただき、同意してください。
+    <li>ファイルを削除・表示する場合は、ファイルを登録したブラウザーから操作してください。
+    <li>別のブラウザー（シークレットモードなども含む）で登録したファイルは削除・表示できません。
+</div>
+
+<label>
+    <input id="isAgree" type="radio"> 同意する </label>
+<br>
+<button id="sendBtn" disabled>ゲストログイン</button>
 
 </body>
 </html>

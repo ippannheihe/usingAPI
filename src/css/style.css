@@ -37,13 +37,26 @@ button[id="conQRCode"] {
  float: right;
 }
 button[id="sendBtn"] {
-    width: 70px;
+    width: 120px;
     height: 50px;
     float: left;
 }
+button[id="sendBtn"] :disabled {
+background-color: #ccc;
+}
+
 .hide{
     display: none;
 }
+
+div {
+    font-size: 10px;
+}
+div li{
+    color: red;
+}
+
+
 /*URL関係*/
 nav ul{
     overflow: hidden;

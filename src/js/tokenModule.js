@@ -10,3 +10,4 @@ export let fileList = sessionStorage.getItem('fileList');
 export const fileListData = JSON.parse(sessionStorage.getItem("fileList"));
 export let requestURL = document.getElementById('requestURL');
 export let previewImage = document.getElementById('previewImage');
+export let  userCode = sessionStorage.getItem('user_code');
