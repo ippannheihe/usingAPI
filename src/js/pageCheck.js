@@ -16,4 +16,6 @@ document.getElementById("closeModalBtn").addEventListener("click", () => {
 
 sendBtn.addEventListener('click', async () => {
     let kore = await pageCheck(token, jsonText, appKey, responseView);
+    console.log(kore);
+
 });

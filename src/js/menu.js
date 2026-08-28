@@ -9,6 +9,3 @@ sendBtn.addEventListener('click', async () => {
     console.log("これ", menu);
 });
 
-
-
-

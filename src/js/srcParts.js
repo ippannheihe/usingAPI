@@ -220,7 +220,35 @@ export async function pageCheck(token, jsonText, appKey, responseView) {
         }
         const resJson = await res.json();
         responseView.textContent = resJson.previewUrl.replace('"');
+        const a = document.createElement("a");
+        a.href = resJson.previewUrl.replace('"');
+        a.textContent = "なまえ";
+        a.target = "_blank"; // 新しいタブで開く（任意）
+
+        document.getElementById("responseView").appendChild(a);
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
+    }
+}
+
+export  async function message(eCode) {
+    const url = "https://api.networkprint.jp/nwpsapi/v2/message/";
+    let messageUrl = url+ eCode;
+
+    try {
+        const res = await fetch(messageUrl, {
+            method: 'GET', headers: {
+                'Accept': 'application/json'
+            },
+        });
+        if (!res.ok) {
+            const errText = await res.text();
+            alertMessage.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
+        }
+        const resJson = await res.json();
+        alertMessage.textContent = JSON.stringify(resJson.ja_jp, null, 2);
+
+    } catch (e) {
+        alertMessage.textContent = 'エラー: ' + e.message;
     }
 }
