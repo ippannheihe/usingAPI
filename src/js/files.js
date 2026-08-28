@@ -4,6 +4,8 @@ import {responseView, sendBtn, token,requestURL,fileListData,previewImage,totalF
 window.addEventListener('load', async () => {
 
     let files = await FilesAPI(token, responseView, requestURL);
+
+
     const fileList = fileListData.file_list;
     responseView.textContent = "ファイルの個数は"+totalFile+"個";
     console.log(fileList);

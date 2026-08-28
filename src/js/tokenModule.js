@@ -12,3 +12,6 @@ export const totalFile = sessionStorage.getItem("total");
 export let requestURL = document.getElementById('requestURL');
 export let previewImage = document.getElementById('previewImage');
 export let  userCode = sessionStorage.getItem('user_code');
+export let  resulCtode = sessionStorage.getItem('result_code');
+export let alertMessage = document.getElementById('alertMessage');
+

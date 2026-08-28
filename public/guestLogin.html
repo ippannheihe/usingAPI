@@ -24,8 +24,6 @@
 <p>ファイルを登録し、コンビニのマルチコピー機でプリントするためのユーザー番号を発行します。
     会員登録は不要です。
 <p>
-<pre id="responseView"></pre>
-
 <label>APPkeyの入力
     <br>
     <input id="tokenKey"
@@ -64,6 +62,15 @@
     <input id="isAgree" type="radio"> 同意する </label>
 <br>
 <button id="sendBtn" disabled>ゲストログイン</button>
+
+<div id="error" class="error">
+    <div class="error-content">
+        <span id="errorAleart" class="close">&times;</span>
+        <p>ユーザー番号</p>
+        <p id="alertMessage"></p>
+        <p id="responseView"></p>
+    </div>
+</div>
 
 </body>
 </html>

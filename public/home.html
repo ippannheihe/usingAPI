@@ -23,8 +23,6 @@
 <div>ユーザー番号とコンビニで使うQRコードはここ</div>
 <button id="openModalBtn">QRコードを表示</button>
 
-<!--<button id="conQRCode"></button>-->
-
 <div id="modal" class="modal">
     <div class="modal-content">
         <span id="closeModalBtn" class="close">&times;</span>
@@ -36,17 +34,15 @@
 </div>
 <br>
 <pre><a href="https://api.networkprint.jp/sharp_netprint/ja/information.aspx" target="_blank" rel="noopener noreferrer">お店での印刷方法はこちら</a> </pre>
-<label>
-    JSON入力:
-<li>
-    <textarea id="jsonText">
-{
-"app_key": "28ce617e-af8b-4110-9eb7-c4ea165c43fe"
-}
-    </textarea>
-</label>
+
 <br>
 <button id="sendBtn">送信</button>
-<div id="responseView">(まだレスポンスはありません)</div>
+<div id="error" class="error">
+    <div class="error-content">
+        <span id="errorAleart" class="close">&times;</span>
+        <p id="alertMessage"></p>
+        <p id="responseView"></p>
+    </div>
+</div>
 </body>
 </html>

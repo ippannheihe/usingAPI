@@ -1,7 +1,7 @@
 import {guestLogin} from "./srcParts.js";
-import {jsonText, responseView, sendBtn, tokenKey} from "./tokenModule.js";
+import {jsonText, responseView, sendBtn, tokenKey,eCode,alertMessage} from "./tokenModule.js";
 export const isAgree = document.getElementById('isAgree');
-
+sessionStorage.setItem("result_code","Z001" );
 isAgree.addEventListener('click', async () => {
  sendBtn.disabled = false;
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>ファイルのプレビュー</title>
     <link rel="stylesheet" href="../src/css/style.css">
+    <script type="module" src="../src/js/filePreview.js" defer></script>
+
 </head>
 <body>
 <h1>ファイルのプレビューを見る(改装予定)</h1>
@@ -19,12 +21,17 @@
     <br>
     <br>
     <button id="sendBtn">送信</button>
-    <pre id="responseView">(まだレスポンスはありません)</pre>
 
     <div id="previewImage"></div>
     <pre id="requestURL"></pre>
-    <script type="module" src="../src/js/filePreview.js" defer></script>
 
+<div id="error" class="error">
+    <div class="error-content">
+        <span id="errorAleart" class="close">&times;</span>
+        <p id="alertMessage"></p>
+        <p id="responseView"></p>
+    </div>
+</div>
 
 </body>
 </html>

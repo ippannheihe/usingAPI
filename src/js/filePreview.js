@@ -12,6 +12,6 @@ sendBtn.addEventListener('click', async () => {
         console.log(fileList[0]);
         console.log(file.file_id);
         let fileId = file.file_id;
-        let preview = await PreviewAPI(fileId, token, responseView);
+        let preview = await PreviewAPI(fileId, token, responseView,previewImage);
     }
 });

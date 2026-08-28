@@ -42,7 +42,7 @@ export async function PreviewAPI(fileId, token, responseView) {
         img.src = URL.createObjectURL(ImageBlob);
         previewImage.appendChild(img);
     } catch (e) {
-        responseView.textContent = 'エラー: ' + e.message;
+     // await  Message(resultCode,alertMessage);
     }
 }
 
@@ -53,15 +53,6 @@ export async function guestLogin(jsonText, tokenKey, responseView) {
     const token = tokenKey.value.trim();
     const text = jsonText.value.trim();
 
-    if (!text) {
-        alert('送信する JSON を入力してください');
-        return;
-    }
-    if (!token) {
-        alert('AppKeyを入力してください');
-        return;
-    }
-    try {
         const jsonData = JSON.parse(text);
         const res = await fetch(url, {
             method: 'POST', headers: {
@@ -73,6 +64,7 @@ export async function guestLogin(jsonText, tokenKey, responseView) {
             responseView.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
         }
         const resJson = await res.json();
+    try {
         responseView.textContent = JSON.stringify(resJson, null, 2);
         sessionStorage.setItem("token", resJson.token);
         sessionStorage.setItem("user_code", resJson.user_code);
@@ -81,6 +73,7 @@ export async function guestLogin(jsonText, tokenKey, responseView) {
         window.location.href = "./fileRegister.html";
     } catch (e) {
         responseView.textContent = 'エラー: ' + e.message;
+        sessionStorage.setItem("result_code", resJson.result_code);
     }
 
 }
@@ -125,7 +118,7 @@ export async function FilesAPI(token, responseView, requestURL) {
 }
 
 //ふぁいる登録
-export async function FileRegisterAPI(formData, token, responseView) {
+export async function FileRegisterAPI(formData, token, responseView,resultCode,alertMessage) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/files/image";
 
 
@@ -141,17 +134,38 @@ export async function FileRegisterAPI(formData, token, responseView) {
         });
 
         if (!res.ok) {
-            const errText = await res.text();
+            const errText = await res.json();
+            sessionStorage.removeItem("result_code");
+            sessionStorage.setItem("result_code", JSON.stringify(errText.result_code));
             responseView.textContent = `HTTPエラー: ${res.status}\n\n` + errText;
+console.log("HAKO",sessionStorage.getItem('result_code'));
+            await Message(resultCode,alertMessage);
             return;
         }
 
         const resJson = await res.json();
 
+        // result_codeが存在する場合、モーダルを表示する
+        if (resJson.result_code) {
+            sessionStorage.setItem("result_code", JSON.stringify(resJson.result_code));
+            const errorModal = document.getElementById("error");
+            if (errorModal) {
+                errorModal.style.display = "block";
+            }
+            if (responseView) {
+                responseView.textContent = `result_code: ${resJson.result_code}`;
+            }
+            // Message APIでエラーメッセージを取得して表示
+            await Message(resJson.result_code, alertMessage);
+            return;
+        }
+
         sessionStorage.removeItem("file_id");
         sessionStorage.setItem("file_id", JSON.stringify(resJson.file_id));
     } catch (e) {
-        responseView.textContent = 'エラー: ' + e.message;
+
+       await Message(resultCode,alertMessage);
+       console.log("うご",resultCode);
     }
 }
 
@@ -231,11 +245,10 @@ export async function pageCheck(token, jsonText, appKey, responseView) {
     }
 }
 
-export  async function message(eCode) {
+export  async function Message(resultCode,alertMessage) {
     const url = "https://api.networkprint.jp/nwpsapi/v2/message/";
-    let messageUrl = url+ eCode;
+    let messageUrl = url+ resultCode;
 
-    try {
         const res = await fetch(messageUrl, {
             method: 'GET', headers: {
                 'Accept': 'application/json'
@@ -248,7 +261,4 @@ export  async function message(eCode) {
         const resJson = await res.json();
         alertMessage.textContent = JSON.stringify(resJson.ja_jp, null, 2);
 
-    } catch (e) {
-        alertMessage.textContent = 'エラー: ' + e.message;
-    }
 }
