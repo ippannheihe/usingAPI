@@ -19,13 +19,12 @@
         <li><img src="../public/asset/img/logo_lawson-BrpsOGFo.png" alt=""></li>
     </ul>
 </nav>
+
 <h1>コンビニで簡単ランダムプリント</h1>
 <br>
 <p>ファイルを登録し、コンビニのマルチコピー機でプリントするためのユーザー番号を発行します。
     会員登録は不要です。
 <p>
-<pre id="responseView"></pre>
-
 <label>APPkeyの入力
     <br>
     <input id="tokenKey"
@@ -65,5 +64,12 @@
 <br>
 <button id="sendBtn" disabled>ゲストログイン</button>
 
+<div id="error" class="error">
+    <div class="error-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+        <p>ファイルアップロードに失敗</p>
+        <p id="responseView"></p>
+    </div>
+</div>
 </body>
 </html>

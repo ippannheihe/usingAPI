@@ -17,10 +17,17 @@
         <li><a href="home.html">いろいろ</a></li>
     </ul>
 </nav>
+<div id="error" class="error">
+    <div class="error-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+        <p>ファイルアップロードに失敗</p>
+        <p id="responseView"></p>
+    </div>
+</div>
 <br>
-<pre id="responseView">(まだレスポンスはありません)</pre>
+<pre id="allFiles">登録されているファイルはありません</pre>
 <pre id="requestURL"></pre>
-<div id="previewImage"></div>
+<div id="previewImage" class="text"></div>
 
 </body>
 </html>

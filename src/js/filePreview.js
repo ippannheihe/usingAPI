@@ -1,7 +1,6 @@
 import {PreviewAPI} from "./srcParts.js";
 import {token, sendBtn, responseView, fileListData,previewImage} from "./tokenModule.js";
 
-
 const fileList = fileListData.file_list;
 previewImage.innerHTML = "";
 console.log(fileList);
@@ -12,6 +11,9 @@ sendBtn.addEventListener('click', async () => {
         console.log(fileList[0]);
         console.log(file.file_id);
         let fileId = file.file_id;
-        let preview = await PreviewAPI(fileId, token, responseView);
+        const nameTag = document.createElement("li");
+        nameTag.textContent = file.original_filename;
+        previewImage.appendChild(nameTag);
+        await PreviewAPI(fileId, token, responseView);
     }
 });

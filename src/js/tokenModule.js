@@ -1,14 +1,14 @@
 export const tokenKey = document.getElementById('tokenKey');
 export const jsonText = document.getElementById('jsonText');
-export const notice = document.getElementById('notice');
 export const appKey = sessionStorage.getItem('appKey');
 export const token = sessionStorage.getItem('token');
 export let limit = Number(sessionStorage.getItem('limit') || 0);
 export const sendBtn = document.getElementById('sendBtn');
-export const responseView = document.getElementById('responseView');
+export let responseView = document.getElementById('responseView');
 export let fileList = sessionStorage.getItem('fileList');
 export const fileListData = JSON.parse(sessionStorage.getItem("fileList"));
 export const totalFile = sessionStorage.getItem("total");
 export let requestURL = document.getElementById('requestURL');
 export let previewImage = document.getElementById('previewImage');
 export let  userCode = sessionStorage.getItem('user_code');
+export let allFiles = document.getElementById('allFiles');

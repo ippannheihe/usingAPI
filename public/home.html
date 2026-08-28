@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>いろいろ</title>
     <link rel="stylesheet" href="../src/css/style.css">
-    <script type="module" src="../src/js/pageCheck.js" defer></script>
     <script type="module" src="../src/js/QRCode.js" defer></script>
 </head>
 <body>
@@ -19,6 +18,13 @@
         <li><a href="home.html">いろいろ</a></li>
     </ul>
 </nav>
+<div id="error" class="error">
+    <div class="error-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+        <p>ファイルアップロードに失敗</p>
+        <p id="responseView"></p>
+    </div>
+</div>
 <br>
 <div>ユーザー番号とコンビニで使うQRコードはここ</div>
 <button id="openModalBtn">QRコードを表示</button>
@@ -36,17 +42,10 @@
 </div>
 <br>
 <pre><a href="https://api.networkprint.jp/sharp_netprint/ja/information.aspx" target="_blank" rel="noopener noreferrer">お店での印刷方法はこちら</a> </pre>
-<label>
-    JSON入力:
-<li>
-    <textarea id="jsonText">
-{
-"app_key": "28ce617e-af8b-4110-9eb7-c4ea165c43fe"
-}
-    </textarea>
-</label>
+
+
 <br>
 <button id="sendBtn">送信</button>
-<a href="responseView">(まだレスポンスはありません)</a>
+
 </body>
 </html>

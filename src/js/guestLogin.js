@@ -1,4 +1,4 @@
-import {guestLogin} from "./srcParts.js";
+import {guestLogin,Message} from "./srcParts.js";
 import {jsonText, responseView, sendBtn, tokenKey} from "./tokenModule.js";
 export const isAgree = document.getElementById('isAgree');
 

@@ -1,11 +1,13 @@
 import {FilesAPI,PreviewAPI} from "./srcParts.js";
-import {responseView, sendBtn, token,requestURL,fileListData,previewImage,totalFile} from "./tokenModule.js";
+import {responseView, sendBtn, token,requestURL,fileListData,previewImage,totalFile,allFiles} from "./tokenModule.js";
 
 window.addEventListener('load', async () => {
 
     let files = await FilesAPI(token, responseView, requestURL);
     const fileList = fileListData.file_list;
-    responseView.textContent = "ファイルの個数は"+totalFile+"個";
+
+   if (totalFile === '0') {allFiles.textContent = "登録されているファイルはありません";}
+   else{allFiles.textContent = "ファイルの個数は"+totalFile+"個";}
     console.log(fileList);
         for (const file of fileList) {
 
